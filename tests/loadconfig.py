@@ -1,7 +1,7 @@
 from toml import loads
 
 from typehint.datatype import Dataclass
-from typehint.typehintaux import Aux, Box
+from typehint.tools import Box, Data
 
 # import orjson
 
@@ -36,9 +36,9 @@ class CacheConfig(Dataclass):
 
 
 class Config(Dataclass):
-    application: Aux(ApplicationConfig)
-    database: Aux(DatabaseConfig)
-    cache: Aux(CacheConfig)
+    application: Data(ApplicationConfig)
+    database: Data(DatabaseConfig)
+    cache: Data(CacheConfig)
 
 
 config = Config(**data)
