@@ -36,9 +36,8 @@ def typehint_callback(cls, name: str, bases: tuple, env: dict, *args, **kwds):
         def type_assertion(self, value: Any, msg: Optional[str] = None):
             if not isinstance(value, self):
                 if msg is not None:
-                    raise TypeError(f"{msg!s} and {self!s} is not accept of {value!r}")
-                else:
-                    raise TypeError(f"{self!s} is not accept of {value!r}")
+                    raise TypeError(msg)
+                raise TypeError(f"{self!s} is not accept of {value!r}")
 
         env["type_assertion"] = type_assertion
 

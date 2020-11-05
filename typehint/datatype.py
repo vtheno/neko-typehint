@@ -6,6 +6,13 @@ class DataclassSyntaxError(Exception):
     pass
 
 
+class Empty:
+    pass
+
+
+EMPTY = Empty()
+
+
 def dataclass_callback(cls, name, bases, env, args, kwds):
     if bases and Dataclass in bases:
         specifications = env.get("__annotations__", None)
@@ -18,14 +25,15 @@ def dataclass_callback(cls, name, bases, env, args, kwds):
                     )
 
             def __init__(self, **kwds):
-                # print(f"[{name}]", kwds)
-                # todo: strict keys length verify
+                # for field_name in self._specifications.keys():
+                #     if kwds.get(field_name, EMPTY) is EMPTY:
+                #         raise TypeError("{self!s} missing {field_name!s} field")
+
                 for field_name, field_type in self._specifications.items():
                     field_value = kwds.get(field_name, None)
                     field_value = field_type.value_struct(
-                        value=field_value, msg=f"{name}.{field_name}"
+                        value=field_value, msg=f"{name}.{field_name} require {field_type!r} but got {field_value!r}"
                     )
-                    # print("typechecking done.")
                     setattr(self, field_name, field_value)
 
             def __repr__(self):
