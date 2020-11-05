@@ -28,7 +28,8 @@ def dataclass_callback(cls, name, bases, env, args, kwds):
                 # for field_name in self._specifications.keys():
                 #     if kwds.get(field_name, EMPTY) is EMPTY:
                 #         raise TypeError("{self!s} missing {field_name!s} field")
-
+                if not kwds:
+                    raise TypeError("empty fields")
                 for field_name, field_type in self._specifications.items():
                     field_value = kwds.get(field_name, None)
                     field_value = field_type.value_struct(
