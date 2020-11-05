@@ -70,23 +70,6 @@ class TypehintSyntaxError(Exception):
     pass
 
 
-"""
-Example:
-class Point(Dataclass):
-    x: Box(int)
-    y: Box(int)
-
-class List:
-    pass
-
-class Nil(List, Dataclass):
-    pass
-
-class Cons(List, Dataclass):
-    head: Box(object)
-    tail: Box(impl)
-
-"""
 __all__ = ["Typehint", "TypehintSyntaxError"]
 
 
